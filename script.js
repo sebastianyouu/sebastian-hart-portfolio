@@ -103,4 +103,29 @@ document.querySelectorAll(".slideshow").forEach((slideshow) => {
 
     updateSlide();
 
+    /* ARROW BUTTONS */
+
+    function makeArrow(direction, label, symbol) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `slide-arrow slide-arrow-${direction}`;
+        button.setAttribute("aria-label", label);
+        button.textContent = symbol;
+        slideshow.appendChild(button);
+        return button;
+    }
+
+    const prevButton = makeArrow("prev", "Previous image", "←");
+    const nextButton = makeArrow("next", "Next image", "→");
+
+    prevButton.addEventListener("click", () => {
+        currentSlide = (currentSlide - 1 + images.length) % images.length;
+        updateSlide();
+    });
+
+    nextButton.addEventListener("click", () => {
+        currentSlide = (currentSlide + 1) % images.length;
+        updateSlide();
+    });
+
 });
